@@ -1,42 +1,55 @@
+//package week1;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Livre est une classe représentant un livre dans un magasin
+ * Livre est une classe représentant une référence de livre dans une bibliothèque
  */
 public class Livre{
-    private String isbn;
-    private String titre;
-    private Tcategorie categorie;
+    private final String isbn;
+    private final String titre;
+    private final Tcategorie categorie;
     private float prix;
     private int quantiteDisponible;
-    private LocalDate dateParution;
+    private final LocalDate dateParution;
 
     Livre(String isbn, String titre, Tcategorie categorie, float prix, int quantiteDisponible, LocalDate dateParution){
         this.isbn = isbn;
         this.titre = titre;
         this.categorie = categorie;
-        this.prix = prix;
-        this.quantiteDisponible = quantiteDisponible;
+        this.prix = isPositive(prix) ? prix : 0.0f;
+        this.quantiteDisponible = isPositive(quantiteDisponible) ? quantiteDisponible : 0;
         this.dateParution = dateParution;
     }
 
     /**
      * getter for quantiteDisponible
-     * @return
      */
     public int getQuantiteDisponible(){
         return quantiteDisponible;
     }
 
     /**
+     * Teste si l'entré est positive
+     */
+    private boolean isPositive(int num){
+        return num >= 0;
+    }
+
+    /**
+     * Teste si l'entré est positive
+     */
+    private boolean isPositive(float num){
+        return num >= 0f;
+    }
+
+    /**
      * permet ou non de diminuer la quantité de un
-     * @return
      */
     public boolean emprunter(){
-        double decision = Math.random();
         boolean result;
-        if(decision < 0.5){
+        if(quantiteDisponible > 0){
             result = true;
         } else{
             result = false;
@@ -46,30 +59,27 @@ public class Livre{
 
     /**
      *  permet d’augmenter la quantité d’un nombre donné
-     * @param nbr
      */
     public void ajouter(int nbr){
         quantiteDisponible += nbr; 
     }
 
     /**
-     * permet d’augmenter la quantité de un
+     * permet d’augmenter la quantité de 1
      */
     public void restituer(){
-        quantiteDisponible += 1; 
+        quantiteDisponible++; 
     }
-
 
     /**
      * permet de récupérer la durée écoulée (nombre d’année) entre la date courante et la date de parution.
-     * @return
      */
     public long getDuree(){
         return dateParution.until(LocalDate.now(), ChronoUnit.YEARS);
     }
 
     public String toString(){
-        return isbn + " " + titre + " " + categorie.toString() + " " + Float.toString(prix) + " " + Integer.toString(quantiteDisponible) + " " + dateParution.toString();
+        return isbn + ", " + titre + ", " + categorie.toString() + ", " + Float.toString(prix) + ", " + Integer.toString(quantiteDisponible) + ", " + dateParution.toString();
     }
 
 }
