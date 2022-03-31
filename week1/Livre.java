@@ -48,13 +48,7 @@ public class Livre{
      * permet ou non de diminuer la quantité de un
      */
     public boolean emprunter(){
-        boolean result;
-        if(quantiteDisponible > 0){
-            result = true;
-        } else{
-            result = false;
-        }
-        return result;
+        return quantiteDisponible > 0;
     }
 
     /**
@@ -79,7 +73,7 @@ public class Livre{
     }
 
     public String toString(){
-        return isbn + ", " + titre + ", " + categorie.toString() + ", " + Float.toString(prix) + ", " + Integer.toString(quantiteDisponible) + ", " + dateParution.toString();
+        return isbn + ", " + titre + ", " + categorie.toString() + ", " + prix + ", " + quantiteDisponible + ", " + dateParution.toString();
     }
 
 }
