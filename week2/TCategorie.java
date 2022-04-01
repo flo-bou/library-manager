@@ -1,11 +1,11 @@
-package week1;
+package week2;
 
-public enum Tcategorie {
+public enum TCategorie {
     INFORMATIQUE("Informatique"), ROMAN("Roman"), BD("Bande dessinée"), NONDEFINI("Catégorie non définie");
 
     private final String name;
 
-    private Tcategorie(String name){
+    private TCategorie(String name){
         this.name = name;
     }
 
