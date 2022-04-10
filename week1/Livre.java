@@ -1,5 +1,4 @@
 package week1;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -55,14 +54,14 @@ public class Livre{
      *  permet d’augmenter la quantité d’un nombre donné
      */
     public void ajouter(int nbr){
-        quantiteDisponible += nbr; 
+        quantiteDisponible += nbr;
     }
 
     /**
      * permet d’augmenter la quantité de 1
      */
     public void restituer(){
-        quantiteDisponible++; 
+        quantiteDisponible++;
     }
 
     /**
