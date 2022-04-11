@@ -126,6 +126,7 @@ public class Livre{
         return dateParution.until(LocalDate.now(), ChronoUnit.YEARS);
     }
 
+    @Override
     public String toString(){
         return "isbn : " + getIsbn() + ", titre : «" + getTitre() + "», catégorie : " + getCategorie().toString() +
                 ", prix : " + getPrix() + ", quantité : " + getQuantiteDisponible() + ", date de parution : " + getDateParution().toString();

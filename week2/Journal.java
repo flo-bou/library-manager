@@ -45,15 +45,16 @@ public class Journal {
         return messages;
     }
 
+    @Override
     public String toString(){
-        // from an ArrayList version of log
+        // from an ArrayList version of log :
 //        String strConcat = "";
 //        for(String message : messagesList){
 //            strConcat = String.join("", strConcat, message, "\n");
 //        }
 //        return strConcat;
 
-        // from a String version of log
+        // from a String version of log :
         return getMessages();
     }
 }

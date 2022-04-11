@@ -8,41 +8,38 @@ import java.time.temporal.ChronoUnit;
  */
 public class Livre{
     private final String isbn;
-    private final String titre;
-    private final TCategorie categorie;
+    private String titre;
+    private TCategorie categorie;
     private float prix = 0.0f;
     private int quantiteDisponible;
-    private final LocalDate dateParution;
+    private LocalDate dateParution;
     private Journal journal = Journal.getInstance();
 
     public String getIsbn() {
         return isbn;
     }
-
     public String getTitre() {
         return titre;
     }
-
     public TCategorie getCategorie() {
         return categorie;
     }
-
     public float getPrix() {
         return prix;
     }
-
     public int getQuantiteDisponible(){
         return quantiteDisponible;
     }
-
     public LocalDate getDateParution() {
         return dateParution;
     }
 
-    public Journal getJournal() {
-        return journal;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
-
+    public void setCategorie(TCategorie categorie) {
+        this.categorie = categorie;
+    }
     public void setPrix(float prix) {
         if(prix < 0.0f){
             journal.addErrorLog("Le prix demandé pour le livre « " + getTitre() + " » est impossible car négatif. Le prix " +
@@ -53,7 +50,6 @@ public class Livre{
                     "de " + getPrix());
         }
     }
-
     public void setQuantiteDisponible(int quantiteDisponible) {
         if(quantiteDisponible < 0){
             journal.addErrorLog("La quantité demandée pour le livre « " + getTitre() + " » est impossible car négative. La" +
@@ -64,11 +60,9 @@ public class Livre{
                     "désormais de " + getQuantiteDisponible());
         }
     }
-
-    public void setJournal(Journal journal) {
-        this.journal = journal;
+    public void setDateParution(LocalDate dateParution) {
+        this.dateParution = dateParution;
     }
-
 
     Livre(String isbn, String titre, TCategorie categorie, float prix, int quantiteDisponible, LocalDate dateParution){
         this.isbn = isbn;
@@ -126,6 +120,7 @@ public class Livre{
         return dateParution.until(LocalDate.now(), ChronoUnit.YEARS);
     }
 
+    @Override
     public String toString(){
         return "isbn : " + getIsbn() + ", titre : «" + getTitre() + "», catégorie : " + getCategorie().toString() +
                 ", prix : " + getPrix() + ", quantité : " + getQuantiteDisponible() + ", date de parution : " + getDateParution().toString();
