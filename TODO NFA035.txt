@@ -1,0 +1,7 @@
+
+* implémenter une méthode de recherche de livre avec la méthode dédiée à la recherche.
+* mettre en place des cas d'erreurs
+* revoir l'arborescence
+prbl : plusieurs méthodes mains dans mon app --> pas bon
+
+arbo : nfa > weekX > fr > cnam > nfa035 > book 
