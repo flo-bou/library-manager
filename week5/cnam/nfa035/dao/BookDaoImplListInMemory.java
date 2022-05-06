@@ -9,12 +9,12 @@ import cnam.nfa035.utils.DataService;
 
 
 /*
-* Class to CRUD Books stored in RAM
+* Class to CRUD Books stored as List in RAM
 * */
-public class BookDaoImplnMemory implements BookDaoInterface {
+public class BookDaoImplListInMemory implements BookDaoInterface {
     private final List<Book> listeLivres;
 
-    public BookDaoImplnMemory(){
+    public BookDaoImplListInMemory(){
         listeLivres = DataService.getLivres();
     }
 

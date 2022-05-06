@@ -6,9 +6,12 @@ import cnam.nfa035.book.BookCategory;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TestBookDaoImplnMemory {
+/*
+ * Class to test BookDao currently in usage
+ **/
+public class TestBookDao {
     public static void test(BookDaoInterface dao){
-        System.out.println("Début des tests sur la classe BookDaoImplnMemory :");
+        System.out.println("Début des tests sur la classe BookDao en cours d'utilisation :");
 
         System.out.println("Affichage des livres en stock :");
         System.out.println(dao.getLivres());
@@ -52,7 +55,7 @@ public class TestBookDaoImplnMemory {
         System.out.println(dao.getLivres());
         System.out.println(" ");
 
-        System.out.println("Fin des tests sur la classe BookDaoImplnMemory ");
+        System.out.println("Fin des tests sur la classe BookDao en cours d'utilisation ");
         System.out.println(" ");
     }
 }

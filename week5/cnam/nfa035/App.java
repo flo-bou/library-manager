@@ -2,7 +2,7 @@ package cnam.nfa035;
 
 import cnam.nfa035.book.TestBook;
 import cnam.nfa035.dao.FactoryDao;
-import cnam.nfa035.dao.TestBookDaoImplnMemory;
+import cnam.nfa035.dao.TestBookDao;
 import cnam.nfa035.log.Log;
 import cnam.nfa035.log.LogLevel;
 import cnam.nfa035.utils.Config;
@@ -16,8 +16,8 @@ public class App {
         String daoToUSe = props.getProperty("dao");
         System.out.println("Le dao spécifié dans le fichier config est : " + daoToUSe);
         TestBook.test(DataService.getLivre());
-        TestBookDaoImplnMemory.test(FactoryDao.getDao());
-        printLog();
+        TestBookDao.test(FactoryDao.getDao());
+//        printLog();
     }
 
     public static void printLog(){
