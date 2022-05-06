@@ -15,7 +15,7 @@ public class App {
         Properties props = Config.getProperties();
         String daoToUSe = props.getProperty("dao");
         System.out.println("Le dao spécifié dans le fichier config est : " + daoToUSe);
-        TestBook.test(DataService.getLivre());
+//        TestBook.test(DataService.getLivre());
         TestBookDao.test(FactoryDao.getDao());
 //        printLog();
     }

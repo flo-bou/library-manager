@@ -9,6 +9,11 @@ import java.util.List;
 
 
 public class DataService {
+    // Cette méthode crée un livre
+    public static Book getLivre(){
+        return new Book("482492384", "Le Capitaine Fracasse", BookCategory.ROMAN, 19.9f, 2, LocalDate.of(1892, 7, 10));
+    }
+
     // Cette méthode crée une liste de livres
     public static List<Book> getLivres(){
         List<Book> listeLivres = new ArrayList<>();
@@ -20,8 +25,4 @@ public class DataService {
         return listeLivres;
     }
 
-    // Cette méthode crée un livre
-    public static Book getLivre(){
-        return new Book("482492384", "Le Capitaine Fracasse", BookCategory.ROMAN, 19.9f, 2, LocalDate.of(1892, 7, 10));
-    }
 }
