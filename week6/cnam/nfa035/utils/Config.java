@@ -30,7 +30,7 @@ public class Config {
     public static File getBooksDbFile(){
         File f = null;
         try {
-            Path p = Paths.get("C:\\Users\\Admin\\Project\\NFA035\\week6\\cnam\\nfa035\\utils\\BooksDB.txt");
+            Path p = Paths.get("C:\\Users\\Admin\\Project\\NFA035\\week6\\cnam\\nfa035\\utils\\BooksDB.ser");
             f = new File(p.toString());
             if(f.isFile()){
                 System.out.println("Le fichier existe");

@@ -1,6 +1,6 @@
 package cnam.nfa035.dao;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +8,6 @@ import cnam.nfa035.book.Book;
 import cnam.nfa035.book.BookCategory;
 import cnam.nfa035.utils.Config;
 import cnam.nfa035.utils.DataService;
-
 
 /*
 * Class to CRUD Books stored in a File
@@ -27,15 +26,58 @@ public class BookDaoImplInFile implements BookDaoInterface {
     private final List<Book> listeLivres;
 
     public BookDaoImplInFile(){
-        this.listeLivres = DataService.getLivres();
+        listeLivres = new ArrayList<>();
         getLivresFromFile();
+        if(this.listeLivres.size() == 0){
+            this.listeLivres.addAll(DataService.getLivres());
+        }
     }
 
-    private void getLivresFromFile(){
+    // désérialisation
+    private void getLivresFromFile() {
+        File f = Config.getBooksDbFile();
+//        FileInputStream fis = null;
+//        ObjectInputStream ois = null;
+        try (FileInputStream fis = new FileInputStream(f)) {
+            System.out.println("fis created");
+            if(fis.available() > 0) {
+                try (ObjectInputStream ois = new ObjectInputStream(fis)) {
+                    // open input stream on file
+//            fis = new FileInputStream(f);
+                    // open serialisation stream on input stream
+//            ois = new ObjectInputStream(fis);
+                    System.out.println("ios created");
+                    // read stream
+//                if (tempObj instanceof Personne ) {}
+                    Book tempBook = (Book) ois.readObject(); // multiples objects ?
+                    // put data in current dao
+                    ajouterLivre(tempBook);
+                } catch (IOException e) {
+                    System.out.println("EOFException : " + e.getMessage());
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println("Erreur : " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    // sérialisation
+    private void saveLivresInFile(){
         File f = Config.getBooksDbFile();
 
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))){
+            for (Book b : this.listeLivres){
+                oos.writeObject(b);
+            }
+        } catch(Exception e){
+            System.out.println("Erreur : " + e.getMessage());
+            e.printStackTrace();
+        }
     }
-//    saveLivresInFile(){}
 
     public String getLivres(){
         String result = "";
@@ -126,6 +168,11 @@ public class BookDaoImplInFile implements BookDaoInterface {
             }
         }
         return result;
+    }
+
+    @Override
+    protected void finalize(){
+        saveLivresInFile();
     }
 
 }

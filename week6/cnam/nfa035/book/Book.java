@@ -1,20 +1,21 @@
 package cnam.nfa035.book;
 
 import cnam.nfa035.log.Log;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
  * Livre est une classe représentant une référence de livre dans une bibliothèque
  */
-public class Book {
+public class Book implements Serializable {
     private final String isbn;
     private String titre;
-    private BookCategory categorie;
+    private transient BookCategory categorie;
     private float prix = 0.0f;
     private int quantiteDisponible;
-    private LocalDate dateParution;
-    private final Log journal = Log.getInstance();
+    private transient LocalDate dateParution;
 
     public String getIsbn() {
         return this.isbn;
@@ -43,21 +44,21 @@ public class Book {
     }
     public void setPrix(float prix) {
         if(prix < 0.0f){
-            this.journal.addErrorLog("Le prix demandé pour le livre « " + getTitre() + " » est impossible car négatif. Le prix " +
+            Log.getInstance().addErrorLog("Le prix demandé pour le livre « " + getTitre() + " » est impossible car négatif. Le prix " +
                     "reste alors inchangé :" + this.getPrix());
         }else{
             this.prix = prix;
-            this.journal.addInfoLog("Le prix du livre « " + getTitre() + " » vient d'être modifié. Le prix est désormais " +
+            Log.getInstance().addInfoLog("Le prix du livre « " + getTitre() + " » vient d'être modifié. Le prix est désormais " +
                     "de " + getPrix());
         }
     }
     public void setQuantiteDisponible(int quantiteDisponible) {
         if(quantiteDisponible < 0){
-            this.journal.addErrorLog("La quantité demandée pour le livre « " + getTitre() + " » est impossible car négative. La" +
+            Log.getInstance().addErrorLog("La quantité demandée pour le livre « " + getTitre() + " » est impossible car négative. La" +
                     " quantité reste alors inchangée :" + this.getQuantiteDisponible());
         } else {
             this.quantiteDisponible = quantiteDisponible;
-            this.journal.addInfoLog("La quantité en stock du livre « " + getTitre() + " » vient d'être modifiée. Le stock est " +
+            Log.getInstance().addInfoLog("La quantité en stock du livre « " + getTitre() + " » vient d'être modifiée. Le stock est " +
                     "désormais de " + getQuantiteDisponible());
         }
     }
@@ -72,7 +73,16 @@ public class Book {
         setPrix(prix);
         setQuantiteDisponible(quantiteDisponible);
         this.dateParution = dateParution;
-        this.journal.addInfoLog("Un livre vient d'être crée. " + this);
+        Log.getInstance().addInfoLog("Un livre vient d'être créé.");
+    }
+    public Book(String isbn, String titre, float prix, int quantiteDisponible){
+        this.isbn = isbn;
+        this.titre = titre;
+        this.categorie = BookCategory.NONDEFINI;
+        setPrix(prix);
+        setQuantiteDisponible(quantiteDisponible);
+        this.dateParution = LocalDate.now();
+        Log.getInstance().addInfoLog("Un livre vient d'être créé.");
     }
 
     /**
@@ -82,10 +92,10 @@ public class Book {
         boolean response = false;
         if(this.quantiteDisponible > 0){
             this.quantiteDisponible--;
-            this.journal.addInfoLog("1 exemplaire du livre « " + getTitre() + " » vient d'être emprunté. Il en reste " + getQuantiteDisponible() + " exemplaires en stock.");
+            Log.getInstance().addInfoLog("1 exemplaire du livre « " + getTitre() + " » vient d'être emprunté. Il en reste " + getQuantiteDisponible() + " exemplaires en stock.");
             response = true;
         } else{
-            this.journal.addWarningLog("Le livre « " + getTitre() + " » n'a pas pu être emprunté car il n'y a plus " +
+            Log.getInstance().addWarningLog("Le livre « " + getTitre() + " » n'a pas pu être emprunté car il n'y a plus " +
                     "d'exemplaires en stock.");
         }
         return response;
@@ -96,11 +106,11 @@ public class Book {
      */
     public void ajouter(int nbr){
         if(nbr < 0){
-            this.journal.addErrorLog("Il est impossible d'ajouter un quantité négative au stock du livre « " + getTitre() +
+            Log.getInstance().addErrorLog("Il est impossible d'ajouter un quantité négative au stock du livre « " + getTitre() +
                     " ». La quantité reste alors inchangée : " + getQuantiteDisponible());
         } else{
             setQuantiteDisponible(getQuantiteDisponible() + nbr);
-            this.journal.addInfoLog(nbr + " exemplaire(s) du livre « " + getTitre() + " » viennent d'être ajoutés en stock. Le " +
+            Log.getInstance().addInfoLog(nbr + " exemplaire(s) du livre « " + getTitre() + " » viennent d'être ajoutés en stock. Le " +
                     "stock total est de " + getQuantiteDisponible() + " exemplaires.");
         }
     }
@@ -110,7 +120,7 @@ public class Book {
      */
     public void restituer(){
         this.quantiteDisponible++;
-        this.journal.addInfoLog("1 exemplaire du livre « " + getTitre() + " » vient d'être restitué. Le " +
+        Log.getInstance().addInfoLog("1 exemplaire du livre « " + getTitre() + " » vient d'être restitué. Le " +
                 "stock est de " + getQuantiteDisponible() + " exemplaires.");
     }
 
