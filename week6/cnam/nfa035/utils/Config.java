@@ -6,6 +6,7 @@ import cnam.nfa035.log.Log;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -32,9 +33,10 @@ public class Config {
         try {
             Path p = Paths.get("C:\\Users\\Admin\\Project\\NFA035\\week6\\cnam\\nfa035\\utils\\BooksDB.ser");
             f = new File(p.toString());
-            if(f.isFile()){
-                System.out.println("Le fichier existe");
-            } else{
+//            URL url = Config.class.getResource("BooksDB.ser");
+//            assert url != null;
+//            f = new File(url.getPath());
+            if(! f.isFile()){
                 System.out.println("Le fichier n'existe pas");
             }
         } catch(Exception e){

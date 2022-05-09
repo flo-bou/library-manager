@@ -24,6 +24,9 @@ public class Book implements Serializable {
         return this.titre;
     }
     public BookCategory getCategorie() {
+        if (this.categorie == null){
+            this.categorie = BookCategory.NONDEFINI;
+        }
         return this.categorie;
     }
     public float getPrix() {
@@ -33,6 +36,9 @@ public class Book implements Serializable {
         return this.quantiteDisponible;
     }
     public LocalDate getDateParution() {
+        if (this.dateParution == null){
+            this.dateParution = LocalDate.now();
+        }
         return this.dateParution;
     }
 
@@ -68,20 +74,11 @@ public class Book implements Serializable {
 
     public Book(String isbn, String titre, BookCategory categorie, float prix, int quantiteDisponible, LocalDate dateParution){
         this.isbn = isbn;
-        this.titre = titre;
-        this.categorie = categorie;
+        setTitre(titre);
+        setCategorie(categorie);
         setPrix(prix);
         setQuantiteDisponible(quantiteDisponible);
-        this.dateParution = dateParution;
-        Log.getInstance().addInfoLog("Un livre vient d'être créé.");
-    }
-    public Book(String isbn, String titre, float prix, int quantiteDisponible){
-        this.isbn = isbn;
-        this.titre = titre;
-        this.categorie = BookCategory.NONDEFINI;
-        setPrix(prix);
-        setQuantiteDisponible(quantiteDisponible);
-        this.dateParution = LocalDate.now();
+        setDateParution(dateParution);
         Log.getInstance().addInfoLog("Un livre vient d'être créé.");
     }
 
@@ -95,8 +92,8 @@ public class Book implements Serializable {
             Log.getInstance().addInfoLog("1 exemplaire du livre « " + getTitre() + " » vient d'être emprunté. Il en reste " + getQuantiteDisponible() + " exemplaires en stock.");
             response = true;
         } else{
-            Log.getInstance().addWarningLog("Le livre « " + getTitre() + " » n'a pas pu être emprunté car il n'y a plus " +
-                    "d'exemplaires en stock.");
+            Log.getInstance().addWarningLog("Le livre « " + getTitre() + " » n'a pas pu être emprunté car il n'y a " +
+                    "plus  d'exemplaires en stock.");
         }
         return response;
     }
@@ -133,8 +130,12 @@ public class Book implements Serializable {
 
     @Override
     public String toString(){
-        return "isbn : " + getIsbn() + ", titre : «" + getTitre() + "», catégorie : " + getCategorie().toString() +
-                ", prix : " + getPrix() + ", quantité : " + getQuantiteDisponible() + ", date de parution : " + getDateParution().toString();
+        return ("isbn : " + getIsbn() +
+                ", titre : «" + getTitre() +
+                "», catégorie : " + getCategorie().toString() +
+                ", prix : " + getPrix() +
+                ", quantité : " + getQuantiteDisponible() +
+                ", date de parution : " + getDateParution().toString());
     }
 
 }

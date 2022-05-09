@@ -101,4 +101,7 @@ public class BookDaoImplMapInMemory implements BookDaoInterface {
         return result;
     }
 
+    @Override
+    public void close(){
+    }
 }

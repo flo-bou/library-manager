@@ -2,8 +2,7 @@
 * implémenter une méthode de recherche de livre avec la méthode dédiée à la recherche.
 * mettre en place des cas d'erreurs
 
-Week6 : 
-* introspection pour lire la classe book ? 
-* Quelle forme/format de texte pour les données ? JSON ? Query String
 
-Serialisation ?
+corriger les champs Categorie et date pour la sérialisation
+
+Faire l'exos week6 sans sérialisation mais juste en ajouter des données de type String / primaire

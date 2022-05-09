@@ -6,7 +6,7 @@ import cnam.nfa035.book.BookCategory;
 import java.util.List;
 
 
-public interface BookDaoInterface {
+public interface BookDaoInterface extends AutoCloseable {
     String getLivres();
     Book getLivreParIsbn(String isbn);
     List<Book> getLivreParCategorie(BookCategory categorie);

@@ -109,4 +109,7 @@ public class BookDaoImplListInMemory implements BookDaoInterface {
         return result;
     }
 
+    @Override
+    public void close(){
+    }
 }

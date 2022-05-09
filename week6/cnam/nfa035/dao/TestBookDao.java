@@ -58,5 +58,6 @@ public class TestBookDao {
 
         System.out.println("Fin des tests sur la classe BookDao en cours d'utilisation ");
         System.out.println(" ");
+//        dao.finalize();
     }
 }
