@@ -1,11 +1,11 @@
-package cnam.nfa035.dao;
+package cnam.nfa035.bookDao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cnam.nfa035.book.Book;
 import cnam.nfa035.book.BookCategory;
-import cnam.nfa035.utils.DataService;
+import cnam.nfa035.DataService;
 
 
 /*

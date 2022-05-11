@@ -1,4 +1,4 @@
-package cnam.nfa035.dao;
+package cnam.nfa035.bookDao;
 
 import cnam.nfa035.book.Book;
 import cnam.nfa035.book.BookCategory;

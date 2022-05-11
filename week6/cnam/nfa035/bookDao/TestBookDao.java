@@ -1,4 +1,4 @@
-package cnam.nfa035.dao;
+package cnam.nfa035.bookDao;
 
 import cnam.nfa035.book.Book;
 import cnam.nfa035.book.BookCategory;
@@ -18,7 +18,7 @@ public class TestBookDao {
         System.out.println(dao.getLivres());
         System.out.println(" ");
 
-        Book livreCaptaine = new Book("482492384", "Le Capitaine Fracasse", BookCategory.ROMAN, 19.9f, 2, LocalDate.of(1892, 7, 10));
+        Book livreCaptaine = new Book("482492384", "Le Capitaine Fracasse", BookCategory.ROMAN, 19.9f, 2, "1892-07-10");
         if(dao.ajouterLivre(livreCaptaine)){
             System.out.println("Le livre « " + livreCaptaine.getTitre() + " » a été ajouté.");
         } else{
@@ -34,7 +34,7 @@ public class TestBookDao {
         System.out.println(listRomans);
 
         Book livreCorrige = new Book("4723974", "La petite Maison dans la prairie 2 : Le retour", BookCategory.ROMAN, 19.9f, 3,
-                LocalDate.of(1946, 5, 2));
+                "1946-05-02");
         if(dao.modifierLivre(livreCorrige)){
             System.out.println("Le livre à l'isbn « " + livreCorrige.getIsbn() + " » a été modifié.");
         }else{

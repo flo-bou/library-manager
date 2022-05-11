@@ -3,6 +3,9 @@
 * mettre en place des cas d'erreurs
 
 
-corriger les champs Categorie et date pour la sérialisation
-
+corriger les champs Categorie et date (LocalDate.parse() pour la sérialisation
+utiliser un chemin relatif pour cibler le fichier.
 Faire l'exos week6 sans sérialisation mais juste en ajouter des données de type String / primaire
+mettre le nom du fichier stockage dans le fichier properties
+mettre app à la racine : cela ne fait pas parti de la librairie
+revoir arbo standat : fr.cnam.utc
