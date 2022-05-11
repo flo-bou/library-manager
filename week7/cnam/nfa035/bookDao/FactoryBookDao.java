@@ -1,7 +1,8 @@
 package cnam.nfa035.bookDao;
 
 import cnam.nfa035.Config;
-import java.lang.reflect.*;
+
+import java.lang.reflect.Constructor;
 
 /*
 * Factory Class to get a Data Access Object
@@ -24,7 +25,7 @@ public abstract class FactoryBookDao {
         } try {
             dao = (cnam.nfa035.bookDao.BookDaoInterface) daoCon.newInstance();
             System.out.println("dao object : " + dao);
-        } catch(InvocationTargetException | InstantiationException | IllegalAccessException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
         return dao;

@@ -72,7 +72,6 @@ public class BookDaoImplMapInMemory implements BookDaoInterface {
         boolean result = false;
         if(this.listeLivres.containsValue(livre)){
             Book b = this.listeLivres.get(livre.getIsbn());
-            // réaffecter chaque champs
             b.setTitre(livre.getTitre());
             b.setCategorie(livre.getCategorie());
             b.setPrix(livre.getPrix());

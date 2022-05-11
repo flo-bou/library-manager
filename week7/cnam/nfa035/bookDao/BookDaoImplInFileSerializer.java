@@ -12,7 +12,7 @@ import cnam.nfa035.Config;
 import cnam.nfa035.DataService;
 
 /*
-* Class to CRUD Books stored in a File
+* Class to CRUD Books serialized in a file
 * */
 public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
@@ -38,16 +38,15 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
         }
         try (InputStream fis = new FileInputStream(f)) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                // read stream
                 Object tempObj;
                 while ((tempObj = ois.readObject()) != null){
                     Book tempBook = (Book) tempObj;
-                    ajouterLivre(tempBook); // put data in current dao
+                    ajouterLivre(tempBook);
                 }
             } catch (EOFException e) {
                 // EOF is always reached : this is normal flow
-//                System.out.println("EOF reached");
-//                System.out.println("ois EOFException : " + e.getMessage());
+                System.out.println("EOF reached");
+                // System.out.println("ois EOFException : " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("ois Exception : " + e.getMessage());
                 e.printStackTrace();
@@ -121,7 +120,6 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public boolean ajouterLivre(Book livre){
         boolean result = true;
-        // parcours de la liste pour savoir si un livre avec un isbn similaire est déjà présent
         for(Book l : this.listeLivres){
             if (livre.getIsbn().equals(l.getIsbn())) {
                 result = false;
@@ -138,7 +136,6 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
         boolean result = false;
         for(Book l : this.listeLivres){
             if(livre.getIsbn().equals(l.getIsbn())){
-                // réaffecter chaque champs
                 l.setTitre(livre.getTitre());
                 l.setCategorie(livre.getCategorie());
                 l.setPrix(livre.getPrix());
@@ -180,7 +177,6 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     @Override
     public void close(){
-//        System.out.println("BookDaoImplInFile.close() method is called ");
         serializeBooks();
     }
 

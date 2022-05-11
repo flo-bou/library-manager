@@ -1,5 +1,6 @@
 package cnam.nfa035.bookDao;
 
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +14,7 @@ import cnam.nfa035.Config;
 import cnam.nfa035.DataService;
 
 /*
-* Class to CRUD Books stored in a File
+* Class to CRUD Books stored in a file
 * */
 public class BookDaoImplInFile implements BookDaoInterface {
 
@@ -30,7 +31,6 @@ public class BookDaoImplInFile implements BookDaoInterface {
         }
     }
 
-    // désérialisation
     private void getLivresFromFile() {
         File f = null;
         try {
@@ -44,26 +44,34 @@ public class BookDaoImplInFile implements BookDaoInterface {
                 String line = "";
                 String isbn = "";
                 String titre = "";
-//                String categorie = "";
+                String categorie = "";
                 String prix = "";
                 String quantite = "";
                 String dateParution = "";
 
                 while ((line = br.readLine()) != null) {
                     if(line.length() > 0){
-                        String[] values = line.split(";;;");
+                        String[] values = line.split(this.separator);
                         System.out.println(Arrays.toString(values));
                         isbn = values[0];
                         titre = values[1];
-//                    categorie = values[2];
-                        prix = values[2];
-                        quantite = values[3];
-                        dateParution = values[4];
-                        Book tempBook = new Book(isbn, titre, Float.parseFloat(prix), Integer.parseInt(quantite), dateParution);
-                        ajouterLivre(tempBook); // put data in current dao
+                        categorie = values[2];
+                        prix = values[3];
+                        quantite = values[4];
+                        dateParution = values[5];
+                        Book tempBook = new Book(
+                            isbn,
+                            titre,
+                            BookCategory.toEnum(categorie),
+                            Float.parseFloat(prix),
+                            Integer.parseInt(quantite),
+                            dateParution
+                        );
+                        ajouterLivre(tempBook);
                     }
                 }
             } catch (EOFException e) {
+                // EOF is always reached : this is normal flow
                 System.out.println("EOF reached");
                 // System.out.println("ois EOFException : " + e.getMessage());
             } catch (Exception e) {
@@ -76,7 +84,6 @@ public class BookDaoImplInFile implements BookDaoInterface {
         }
     }
 
-    // sérialisation
     private void saveLivresInFile(){
         File f = null;
         try{
@@ -85,18 +92,15 @@ public class BookDaoImplInFile implements BookDaoInterface {
         } catch(Exception e){
             e.printStackTrace();
         }
-        // on écrit les valeurs des champs dans un certain ordre avec un flu de lecture des primitifs / un lf==flux
-        // bufferise de chars
-        // retour à la ligne pour chaque nouveau livre
         try (FileWriter fw = new FileWriter(f)) {
             try(BufferedWriter bw = new BufferedWriter(fw)){
                 for (Book b : this.listeLivres){
-                    bw.write(b.getIsbn() + separator);
-                    bw.write(b.getTitre() + separator);
-//                    bw.write(Float.toString(b.getCategorie()) + separator);
-                    bw.write(Float.toString(b.getPrix()) + separator);
-                    bw.write(Integer.toString(b.getQuantiteDisponible()) + separator);
-                    bw.write(b.getDateParution() + separator);
+                    bw.write(b.getIsbn() + this.separator);
+                    bw.write(b.getTitre() + this.separator);
+                    bw.write(b.getCategorie().toString() + this.separator);
+                    bw.write(Float.toString(b.getPrix()) + this.separator);
+                    bw.write(Integer.toString(b.getQuantiteDisponible()) + this.separator);
+                    bw.write(b.getDateParution() + this.separator);
                     bw.newLine();
                 }
             } catch(Exception e){
@@ -149,7 +153,6 @@ public class BookDaoImplInFile implements BookDaoInterface {
 
     public boolean ajouterLivre(Book livre){
         boolean result = true;
-        // parcours de la liste pour savoir si un livre avec un isbn similaire est déjà présent
         for(Book b : this.listeLivres){
             if (livre.getIsbn().equals(b.getIsbn())) {
                 result = false;
@@ -166,7 +169,6 @@ public class BookDaoImplInFile implements BookDaoInterface {
         boolean result = false;
         for(Book b : this.listeLivres){
             if(livre.getIsbn().equals(b.getIsbn())){
-                // réaffecter chaque champs
                 b.setTitre(livre.getTitre());
                 b.setCategorie(livre.getCategorie());
                 b.setPrix(livre.getPrix());
@@ -208,7 +210,6 @@ public class BookDaoImplInFile implements BookDaoInterface {
 
     @Override
     public void close(){
-//        System.out.println("BookDaoImplInFile.close() method is called ");
         saveLivresInFile();
     }
 

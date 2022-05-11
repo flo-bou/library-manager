@@ -58,7 +58,6 @@ public class BookDaoImplListInMemory implements BookDaoInterface {
 
     public boolean ajouterLivre(Book livre){
         boolean result = true;
-        // parcours de la liste pour savoir si un livre avec un isbn similaire est déjà présent
         for(Book l : this.listeLivres){
             if (livre.getIsbn().equals(l.getIsbn())) {
                 result = false;
@@ -75,7 +74,6 @@ public class BookDaoImplListInMemory implements BookDaoInterface {
         boolean result = false;
         for(Book l : this.listeLivres){
             if(livre.getIsbn().equals(l.getIsbn())){
-                // réaffecter chaque champs
                 l.setTitre(livre.getTitre());
                 l.setCategorie(livre.getCategorie());
                 l.setPrix(livre.getPrix());

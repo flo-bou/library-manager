@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 public class Book implements Serializable {
     private final String isbn;
     private String titre;
-    private transient BookCategory categorie;
+    private BookCategory categorie;
     private float prix = 0.0f;
     private int quantiteDisponible;
     private LocalDate dateParution;
@@ -72,22 +72,17 @@ public class Book implements Serializable {
         this.dateParution = LocalDate.parse(dateParution);
     }
 
-    public Book(String isbn, String titre, BookCategory categorie, float prix, int quantiteDisponible,
-                String dateParution){
+    public Book(
+        String isbn,
+        String titre,
+        BookCategory categorie,
+        float prix,
+        int quantiteDisponible,
+        String dateParution
+    ){
         this.isbn = isbn;
         setTitre(titre);
         setCategorie(categorie);
-        setPrix(prix);
-        setQuantiteDisponible(quantiteDisponible);
-        setDateParution(dateParution);
-        Log.getInstance().addInfoLog("Un livre vient d'être créé.");
-    }
-
-    public Book(String isbn, String titre, float prix, int quantiteDisponible,
-                String dateParution){
-        this.isbn = isbn;
-        setTitre(titre);
-        setCategorie(BookCategory.NONDEFINI);
         setPrix(prix);
         setQuantiteDisponible(quantiteDisponible);
         setDateParution(dateParution);
