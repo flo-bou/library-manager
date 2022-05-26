@@ -82,17 +82,17 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public String getLivres(){
         String result = "";
-        for(Book l : this.listeLivres){
-            result = result.concat(l.toString()).concat("\n");
+        for(Book b : this.listeLivres){
+            result = result.concat(b.toString()).concat("\n");
         }
         return result;
     }
 
     public Book getLivreParIsbn(String isbn){
         Book result = null;
-        for(Book l : this.listeLivres){
-            if(isbn.equals(l.getIsbn())){
-                result = l;
+        for(Book b : this.listeLivres){
+            if(isbn.equals(b.getIsbn())){
+                result = b;
             }
         }
         return result;
@@ -100,9 +100,9 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public List<Book> getLivreParCategorie(BookCategory categorie){
         List<Book> result = new ArrayList<>();
-        for(Book l : this.listeLivres){
-            if(categorie == l.getCategorie()){
-                result.add(l);
+        for(Book b : this.listeLivres){
+            if(categorie == b.getCategorie()){
+                result.add(b);
             }
         }
         return result;
@@ -110,9 +110,9 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public List<Book> getLivreParTitre(String titre){
         List<Book> result = new ArrayList<>();
-        for(Book l : this.listeLivres){
-            if(titre.equals(l.getTitre())){
-                result.add(l);
+        for(Book b : this.listeLivres){
+            if(b.getTitre().contains(titre)){
+                result.add(b);
             }
         }
         return result;
@@ -120,8 +120,8 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public boolean ajouterLivre(Book livre){
         boolean result = true;
-        for(Book l : this.listeLivres){
-            if (livre.getIsbn().equals(l.getIsbn())) {
+        for(Book b : this.listeLivres){
+            if (livre.getIsbn().equals(b.getIsbn())) {
                 result = false;
                 break;
             }
@@ -134,13 +134,13 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public boolean modifierLivre(Book livre){
         boolean result = false;
-        for(Book l : this.listeLivres){
-            if(livre.getIsbn().equals(l.getIsbn())){
-                l.setTitre(livre.getTitre());
-                l.setCategorie(livre.getCategorie());
-                l.setPrix(livre.getPrix());
-                l.setQuantiteDisponible(livre.getQuantiteDisponible());
-                l.setDateParution(livre.getDateParution());
+        for(Book b : this.listeLivres){
+            if(livre.getIsbn().equals(b.getIsbn())){
+                b.setTitre(livre.getTitre());
+                b.setCategorie(livre.getCategorie());
+                b.setPrix(livre.getPrix());
+                b.setQuantiteDisponible(livre.getQuantiteDisponible());
+                b.setDateParution(livre.getDateParution());
                 result = true;
             }
         }
@@ -149,9 +149,9 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public boolean modifierLivre(String isbn, int quantite){
         boolean result = false;
-        for(Book l : this.listeLivres){
-            if(isbn.equals(l.getIsbn())){
-                l.setQuantiteDisponible(quantite);
+        for(Book b : this.listeLivres){
+            if(isbn.equals(b.getIsbn())){
+                b.setQuantiteDisponible(quantite);
                 result = true;
             }
         }
@@ -160,9 +160,9 @@ public class BookDaoImplInFileSerializer implements BookDaoInterface {
 
     public boolean suprimerLivre(String isbn){
         boolean result = false;
-        for(Book l : this.listeLivres){
-            if(isbn.equals(l.getIsbn())){
-                this.listeLivres.remove(l);
+        for(Book b : this.listeLivres){
+            if(isbn.equals(b.getIsbn())){
+                this.listeLivres.remove(b);
                 result = true;
             }
         }

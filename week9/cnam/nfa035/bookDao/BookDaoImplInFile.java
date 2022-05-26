@@ -101,7 +101,7 @@ public class BookDaoImplInFile implements BookDaoInterface {
                         b.getCategorie().toString() + this.SEPARATOR +
                         Float.toString(b.getPrix()) + this.SEPARATOR +
                         Integer.toString(b.getQuantiteDisponible()) + this.SEPARATOR +
-                        b.getDateParution() + this.SEPARATOR
+                        b.getDateParution()
                     );
                     bw.newLine();
                 }
@@ -146,7 +146,7 @@ public class BookDaoImplInFile implements BookDaoInterface {
     public List<Book> getLivreParTitre(String titre){
         List<Book> result = new ArrayList<>();
         for(Book b : this.listeLivres){
-            if(titre.equals(b.getTitre())){
+            if(b.getTitre().contains(titre)){
                 result.add(b);
             }
         }

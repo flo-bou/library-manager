@@ -1,5 +1,4 @@
 
-* implémenter une méthode de recherche de livre avec la méthode dédiée à la recherche.
 * mettre en place des cas d'erreurs
 * corriger le champs Categorie
-* nettoyer le code des notes/comms
+

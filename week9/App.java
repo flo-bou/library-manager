@@ -1,16 +1,21 @@
-import cnam.nfa035.ihm.BiblioFrame;
+import cnam.nfa035.bookDao.BookDaoInterface;
+import cnam.nfa035.bookDao.FactoryBookDao;
+import cnam.nfa035.bookDao.TestBookDao;
+import cnam.nfa035.ihm.SearchFrame;
 import cnam.nfa035.log.*;
 
 
 public class App {
     public static void main(String[] args) {
-        BiblioFrame fenetre = new BiblioFrame();
+        SearchFrame searchF = new SearchFrame();
 //        TestBook.test(DataService.getLivre());
-//        try (BookDaoInterface dao = FactoryBookDao.getDao()){
+        try (BookDaoInterface dao = FactoryBookDao.getDao()){
 //            TestBookDao.test(dao);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+            System.out.println(dao.getLivres());
+            searchF.setBookDao(dao);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        printLog();
     }
 

@@ -40,12 +40,28 @@ public class DataService {
                 "1792-02-23"
         ));
         listeLivres.add(new Book(
-                "432483023",
+                "122092023",
                 "Spirou",
                 BookCategory.BD,
                 9.99f,
-                0,
+                4,
                 "1992-07-12"
+        ));
+        listeLivres.add(new Book(
+                "132453493",
+                "Spirou 2 : le retour",
+                BookCategory.BD,
+                19.99f,
+                2,
+                "1993-08-18"
+        ));
+        listeLivres.add(new Book(
+                "623483053",
+                "Le petit Prince",
+                BookCategory.ROMAN,
+                29.99f,
+                3,
+                "1954-07-09"
         ));
 
         return listeLivres;

@@ -51,9 +51,8 @@ public class BookDaoImplMapInMemory implements BookDaoInterface {
     public List<Book> getLivreParTitre(String titre){
         List<Book> result = new ArrayList<>();
         for(Book b : this.listeLivres.values()){
-            if(titre.equals(b.getTitre())){
+            if(b.getTitre().contains(titre)){
                 result.add(b);
-                break;
             }
         }
         return result;
