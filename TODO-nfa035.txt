@@ -1,4 +1,0 @@
-
-* mettre en place des cas d'erreurs
-* corriger le champs Categorie
-
